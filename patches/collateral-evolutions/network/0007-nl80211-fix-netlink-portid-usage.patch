@@ -50,11 +50,20 @@ Signed-off-by: Eyal Reizer <eyalr@ti.com>
  net/wireless/nl80211.c |    4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/net/wireless/nl80211.c b/net/wireless/nl80211.c
-index 0f621b20..f949618 100644
---- a/net/wireless/nl80211.c
-+++ b/net/wireless/nl80211.c
-@@ -8436,7 +8436,7 @@ static int nl80211_crit_protocol_start(struct sk_buff *skb,
+Index: compat-drivers/net/wireless/nl80211.c
+===================================================================
+--- compat-drivers.orig/net/wireless/nl80211.c	2013-12-12 15:31:44.157003019 +0200
++++ compat-drivers/net/wireless/nl80211.c	2013-12-12 15:35:46.493009025 +0200
+@@ -8338,7 +8338,7 @@
+ 	if (!msg)
+ 		return -ENOMEM;
+ 
+-	hdr = nl80211hdr_put(msg, info->snd_portid, info->snd_seq, 0,
++	hdr = nl80211hdr_put(msg, genl_info_snd_portid(info), info->snd_seq, 0,
+ 			     NL80211_CMD_GET_COALESCE);
+ 	if (!hdr)
+ 		goto nla_put_failure;
+@@ -8812,7 +8812,7 @@
  
  	ret = rdev_crit_proto_start(rdev, wdev, proto, duration);
  	if (!ret)
@@ -63,6 +72,3 @@ index 0f621b20..f949618 100644
  
  	return ret;
  }
--- 
-1.7.9.5
-
